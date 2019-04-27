@@ -9,9 +9,4 @@ public enum InsuranceType {
     ACCIDENT,
     EMPLOYERS,
     UNDEFINED;
-
-
-
-
-
 }

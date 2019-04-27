@@ -1,6 +1,6 @@
 package insurance.model;
 
-public class HomeInsurance extends PropertyInsurance{
+public class HomeInsurance extends PropertyInsurance {
 
     private String adress;
 
@@ -17,7 +17,7 @@ public class HomeInsurance extends PropertyInsurance{
         this.adress = adress;
     }
 
-    public String toString(){
+    public String toString() {
         return super.toString() + String.format("  %-25s  ",
                 "Adress: " + adress);
     }

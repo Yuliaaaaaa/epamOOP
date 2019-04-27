@@ -18,7 +18,7 @@ public class AccidentInsurance extends PersonalInsurance {
     }
 
 
-    public String toString(){
+    public String toString() {
         return super.toString() + String.format("  %-25s  ",
                 "Accident: " + accidentType);
     }

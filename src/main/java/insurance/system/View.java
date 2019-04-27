@@ -6,37 +6,36 @@ import java.util.List;
 
 public class View {
 
-    public View(){
+    public View() {
 
     }
 
 
-    public void menu(){
-        System.out.println("\n\nТема: Страхование\n\nДоступные действия: \n"
-                +"1. Вывести дериватив\n"
-                +"2. Посчитать суммарную стоимость взносов\n"
-                +"3. Посчитать суммарную компенсацию\n"
-                +"4. Сортировать деривативу по уменьшению степени риска\n"
-                +"5. Найти обязательства в диапазоне значений взносов\n"
-                +"6. Найти обязательства в диапазоне значений компенсаций\n"
-                +"7. Найти обязательства в диапазоне значений уровней риска\n"
-                +"8. Добавить страховое обязательство\n"
-                +"9. Удалить страховое обязательство\n" +
-                "10. Выход\n");
+    public void menu() {
+        System.out.println("\n\nTopic: Insurance\n\nAvailable actions: \n"
+                + "1. Show derivative\n"
+                + "2. Calculate the total cost of contributions\n"
+                + "3. Calculate total compensation\n"
+                + "4. Sort derivatives by the reducing of the risk level\n"
+                + "5. " + CommonlyUsedStrings.FIND_OBLIGATION_IN_RANGE_OF + "contributions\n"
+                + "6. " + CommonlyUsedStrings.FIND_OBLIGATION_IN_RANGE_OF + "compensation values\n"
+                + "7. " + CommonlyUsedStrings.FIND_OBLIGATION_IN_RANGE_OF + "risk levels\n"
+                + "8. Add obligation\n"
+                + "9. Remove obligation\n" +
+                "10. Exit\n");
     }
 
 
-    public void outputResults(List<Insurance> results){
-        if(results!=null){
+    public void outputResults(List<Insurance> results) {
+        if (results != null) {
             System.out.printf("     %-5s            %-25s    %-20s      %-10s         %-20s  %-15s                    %-30s%n",
-                    "№" , "Страховщик", "Страхователь", "Взнос", "Компенсация", "Уровень риска", "Дополнительная информация");
+                    "№", "Insurer", "Insured", "Contribution", "Compensation", "Risk level", "Additional information");
             System.out.println("_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________");
-            for(int i = 0; i < results.size(); i++){
+            for (int i = 0; i < results.size(); i++) {
                 System.out.println(results.get(i));
             }
-        }
-        else{
-            System.err.println("Ваш запит не дав результатів!\n\n");
+        } else {
+            System.err.println("Your request has no results!\n\n");
         }
         results = null;
     }

@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public class Factory {
 
-    public static Insurance getSpecificInsurance(Insurance insurance, InsuranceType type){
-        Scanner scanner = new Scanner(System.in);
-        switch (type){
-            case LIABILITY:{
+    public static Insurance getSpecificInsurance(Insurance insurance, InsuranceType type) {
+        Scanner scanner = ScannerHolder.scanner;
+        switch (type) {
+            case LIABILITY: {
                 System.out.println("Liable person:\t");
                 String liable = scanner.nextLine();
                 return new LiabilityInsurance(
@@ -17,25 +17,23 @@ public class Factory {
                         insurance.getCompensation(), insurance.getContribution(),
                         insurance.getRisk(), liable);
             }
-            case PERSONAL:{
+            case PERSONAL: {
                 System.out.println("Person:\t");
                 String person = scanner.nextLine();
                 return new PersonalInsurance(
                         insurance.getInsurer(), insurance.getInsured(),
                         insurance.getCompensation(), insurance.getContribution(),
                         insurance.getRisk(), person);
-
             }
-            case PROPERTY:{
+            case PROPERTY: {
                 System.out.println("Type of property:\t");
                 String propType = scanner.nextLine();
                 return new PropertyInsurance(
                         insurance.getInsurer(), insurance.getInsured(),
                         insurance.getCompensation(), insurance.getContribution(),
                         insurance.getRisk(), propType);
-
             }
-            case EMPLOYERS:{
+            case EMPLOYERS: {
                 System.out.println("Liable person:\t");
                 String liable = scanner.nextLine();
                 System.out.println("Employer:\t");
@@ -44,10 +42,8 @@ public class Factory {
                         insurance.getInsurer(), insurance.getInsured(),
                         insurance.getCompensation(), insurance.getContribution(),
                         insurance.getRisk(), liable, employer);
-
             }
-
-            case ACCIDENT:{
+            case ACCIDENT: {
                 System.out.println("Person:\t");
                 String person = scanner.nextLine();
                 System.out.println("Accident type:\t");
@@ -58,7 +54,7 @@ public class Factory {
                         insurance.getRisk(), person, accidentType);
 
             }
-            case HOME:{
+            case HOME: {
                 System.out.println("Type of property:\t");
                 String propType = scanner.nextLine();
                 System.out.println("Address:\t");
@@ -69,7 +65,7 @@ public class Factory {
                         insurance.getRisk(), propType, address);
 
             }
-            case MEDICAL:{
+            case MEDICAL: {
                 System.out.println("Person:\t");
                 String person = scanner.nextLine();
                 System.out.println("Medical card ID:\t");
@@ -79,20 +75,19 @@ public class Factory {
                         insurance.getCompensation(), insurance.getContribution(),
                         insurance.getRisk(), person, cardId);
             }
-            case UNDEFINED:{
+            case UNDEFINED: {
                 return insurance;
             }
-            default:{
+            default: {
                 return insurance;
             }
         }
     }
 
-    public static InsuranceType getInsuranceType(String string){
+    public static InsuranceType getInsuranceType(String string) {
         try {
             return InsuranceType.valueOf(string.toUpperCase());
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             return InsuranceType.UNDEFINED;
         }
     }

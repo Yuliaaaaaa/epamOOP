@@ -1,6 +1,6 @@
 package insurance.model;
 
-public class MedicalInsurance extends PersonalInsurance{
+public class MedicalInsurance extends PersonalInsurance {
 
     private long cardID;
 
@@ -19,7 +19,7 @@ public class MedicalInsurance extends PersonalInsurance{
     }
 
 
-    public String toString(){
+    public String toString() {
         return super.toString() + String.format("  %-25s  ",
                 "Medical card №: " + cardID);
     }

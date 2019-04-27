@@ -14,7 +14,7 @@ public class ControllerTest {
     private Controller controller;
 
     @Before
-    public void createController(){
+    public void createController() {
         List<Insurance> obligs = new LinkedList<Insurance>();
 
 
@@ -42,7 +42,7 @@ public class ControllerTest {
         controller.sortingDescByRisk();
 
 
-        assertEquals("derivatives not equal",der, controller.getSelected());
+        assertEquals("derivatives not equal", der, controller.getSelected());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class ControllerTest {
         controller.sortingDescByRisk();
 
 
-        assertNotEquals("derivatives  equal",der, controller.getSelected());
+        assertNotEquals("derivatives  equal", der, controller.getSelected());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class ControllerTest {
 
         Derivative actualDer = controller.selectContributions(500, 1500);
 
-        assertEquals("derivatives not equal",expectedDer, actualDer);
+        assertEquals("derivatives not equal", expectedDer, actualDer);
     }
 
     @Test
@@ -85,7 +85,7 @@ public class ControllerTest {
         Derivative actualDer = controller.selectContributions(500, 1500);
 
 
-        assertNotEquals("derivatives  equal",expectedDer, actualDer);
+        assertNotEquals("derivatives  equal", expectedDer, actualDer);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class ControllerTest {
         Derivative actualDer = controller.selectCompensations(400000000, 1000000000);
 
 
-        assertEquals("derivatives not equal",expectedDer, actualDer);
+        assertEquals("derivatives not equal", expectedDer, actualDer);
     }
 
     @Test
@@ -112,7 +112,7 @@ public class ControllerTest {
         Derivative actualDer = controller.selectCompensations(400000000, 1000000000);
 
 
-        assertNotEquals("derivatives  equal",expectedDer, actualDer);
+        assertNotEquals("derivatives  equal", expectedDer, actualDer);
     }
 
     @Test
@@ -126,7 +126,7 @@ public class ControllerTest {
         Derivative actualDer = controller.selectRisks(0.5f, 0.6f);
 
 
-        assertEquals("derivatives not equal",expectedDer, actualDer);
+        assertEquals("derivatives not equal", expectedDer, actualDer);
     }
 
     @Test
@@ -140,35 +140,35 @@ public class ControllerTest {
         Derivative actualDer = controller.selectRisks(0.5f, 0.6f);
 
 
-        assertNotEquals("derivatives equal",expectedDer, actualDer);
+        assertNotEquals("derivatives equal", expectedDer, actualDer);
     }
 
     @Test
-    public void countSummaryCompensation1(){
+    public void countSummaryCompensation1() {
         long sum = 9400000000l;
         assertEquals("sum should be true", controller.countSummaryCompensation(), sum);
     }
 
     @Test
-    public void countSummaryCompensation2(){
+    public void countSummaryCompensation2() {
         long sum = 940000000l;
         assertNotEquals("sum should be false", controller.countSummaryCompensation(), sum);
     }
 
     @Test
-    public void countSummaryContribution1(){
+    public void countSummaryContribution1() {
         long sum = 11000;
         assertEquals("sum should be true", controller.countSummaryContribution(), sum);
     }
 
     @Test
-    public void countSummaryContribution2(){
+    public void countSummaryContribution2() {
         long sum = 12000;
         assertNotEquals("sum should be false", controller.countSummaryContribution(), sum);
     }
 
     @Test
-    public void shouldNotReturnNullAfterDeletingAll(){
+    public void shouldNotReturnNullAfterDeletingAll() {
         controller.getAllBase().delObligation(1);
         controller.getAllBase().delObligation(2);
         controller.getAllBase().delObligation(3);

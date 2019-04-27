@@ -1,15 +1,12 @@
 package insurance.model;
 
 
-//страхование ответственности
-
 public class LiabilityInsurance extends Insurance {
 
     private String liablePerson;
 
     public LiabilityInsurance(String insurer, String insured, long compensation, int contribution, float risk, String liablePerson) {
         super(insurer, insured, compensation, contribution, risk);
-
         this.liablePerson = liablePerson;
     }
 
@@ -22,10 +19,8 @@ public class LiabilityInsurance extends Insurance {
     }
 
 
-    public String toString(){
+    public String toString() {
         return super.toString() + String.format("  %-25s  ",
                 "Liable person: " + liablePerson);
     }
 }
-
-
