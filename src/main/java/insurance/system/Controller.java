@@ -18,7 +18,7 @@ public class Controller {
 
     public Controller() {
         view = new View();
-        List<Insurance> obligs = new LinkedList<Insurance>();
+        List<Insurance> obligs = new ArrayList<Insurance>();
         allBase = new Derivative(obligs);
         selected = null;
     }
@@ -49,7 +49,7 @@ public class Controller {
 
 
     public Derivative selectContributions(int lowID, int topID) {
-        List<Insurance> newDerivative = new LinkedList<Insurance>();
+        List<Insurance> newDerivative = new ArrayList<Insurance>();
         for (int i = 0; i < allBase.getObligations().size(); i++) {
             if (allBase.getObligations().get(i).getContribution() <= topID &&
                     allBase.getObligations().get(i).getContribution() >= lowID) {
@@ -60,7 +60,7 @@ public class Controller {
     }
 
     public Derivative selectCompensations(long lowID, long topID) {
-        List<Insurance> newDerivative = new LinkedList<Insurance>();
+        List<Insurance> newDerivative = new ArrayList<Insurance>();
         for (int i = 0; i < allBase.getObligations().size(); i++) {
             if (allBase.getObligations().get(i).getCompensation() <= topID &&
                     allBase.getObligations().get(i).getCompensation() >= lowID) {
@@ -71,7 +71,7 @@ public class Controller {
     }
 
     public Derivative selectRisks(float lowID, float topID) {
-        List<Insurance> newDerivative = new LinkedList<Insurance>();
+        List<Insurance> newDerivative = new ArrayList<Insurance>();
         for (int i = 0; i < allBase.getObligations().size(); i++) {
             if (allBase.getObligations().get(i).getRisk() <= topID &&
                     allBase.getObligations().get(i).getRisk() >= lowID) {
