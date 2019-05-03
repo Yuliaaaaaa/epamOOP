@@ -17,7 +17,7 @@ public class EmployersCompensation extends LiabilityInsurance {
         this.employer = employer;
     }
 
-    public String toString(){
+    public String toString() {
         return super.toString() + String.format("  %-25s  ",
                 "Employer's name: " + employer);
     }

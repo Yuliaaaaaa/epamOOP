@@ -1,22 +1,19 @@
 package insurance.model;
 
 
-import insurance.system.Factory;
-
 public class Insurance {
 
     private static int last_ID;
 
     private int id;
-    private final String insurer;      //страховщик
-    private final long compensation;   //компенсация
-    private final String insured;      //страхователь
-    private final int contribution;    //взнос
-    private float risk;      //степень риска
-    private String type = InsuranceType.UNDEFINED.toString();
+    private final String insurer;
+    private final long compensation;
+    private final String insured;
+    private final int contribution;
+    private float risk;
 
     public Insurance(String insurer, String insured, long compensation, int contribution, float risk) {
-        if(last_ID == 0) last_ID = 1;
+        if (last_ID == 0) last_ID = 1;
         else ++last_ID;
 
         id = last_ID;
@@ -26,7 +23,6 @@ public class Insurance {
         this.contribution = contribution;
         this.risk = risk;
     }
-
 
 
     public int getId() {
@@ -59,20 +55,17 @@ public class Insurance {
         this.risk = risk;
     }
 
-    public String toString(){
+    public String toString() {
         return String.format("||  %5d   ||  %-25s  ||  %-25s  ||  %-10d  ||  %-20d  ||  %-15f  ||",
-                id,  insurer, insured, contribution, compensation, risk);
+                id, insurer, insured, contribution, compensation, risk);
     }
 
-    public boolean equals(Object oblig){
-        if(oblig == null) return false;
-        if(this == oblig) return true;
-        if(!(oblig instanceof Insurance) || oblig.getClass() != this.getClass()
+    public boolean equals(Object oblig) {
+        if (oblig == null) return false;
+        if (this == oblig) return true;
+        if (!(oblig instanceof Insurance) || oblig.getClass() != this.getClass()
                 || this.hashCode() != oblig.hashCode()) return false;
-
-        if(id == ((Insurance)oblig).id) return true;
-
-
+        if (id == ((Insurance) oblig).id) return true;
         return false;
     }
 

@@ -9,12 +9,11 @@ public class Derivative {
         this.obligations = obligations;
     }
 
-
-    public Derivative(Derivative d){
+    public Derivative(Derivative d) {
         this.obligations = d.obligations;
     }
-    public Derivative(){
 
+    public Derivative() {
     }
 
     public List<Insurance> getObligations() {
@@ -25,14 +24,14 @@ public class Derivative {
         this.obligations = obligations;
     }
 
-    public Derivative addObligation(Insurance oblig){
+    public Derivative addObligation(Insurance oblig) {
         obligations.add(oblig);
         return this;
     }
 
-    public boolean delObligation(int id){
-        for(int i = 0; i < obligations.size(); i++){
-            if(obligations.get(i).getId() == id){
+    public boolean delObligation(int id) {
+        for (int i = 0; i < obligations.size(); i++) {
+            if (obligations.get(i).getId() == id) {
                 obligations.remove(i);
                 return true;
             }
@@ -40,12 +39,12 @@ public class Derivative {
         return false;
     }
 
-    public boolean equals(Object der){
-        if(der == this) return true;
-        if(!(der instanceof Derivative)) return false;
-        if(((Derivative)der).getObligations().size()!= this.obligations.size()) return false;
-        for(int i = 0; i < obligations.size(); i++){
-            if(!((obligations.get(i)).equals(((Derivative)der).getObligations().get(i))))
+    public boolean equals(Object der) {
+        if (der == this) return true;
+        if (!(der instanceof Derivative)) return false;
+        if (((Derivative) der).getObligations().size() != this.obligations.size()) return false;
+        for (int i = 0; i < obligations.size(); i++) {
+            if (!((obligations.get(i)).equals(((Derivative) der).getObligations().get(i))))
                 return false;
         }
         return true;

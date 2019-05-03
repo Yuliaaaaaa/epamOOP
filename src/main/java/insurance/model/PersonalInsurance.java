@@ -20,9 +20,8 @@ public class PersonalInsurance extends Insurance {
     }
 
 
-    public String toString(){
+    public String toString() {
         return super.toString() + String.format("  %-25s  ",
                 "Person: " + person);
     }
 }
-

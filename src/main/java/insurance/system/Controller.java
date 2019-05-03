@@ -1,6 +1,7 @@
 package insurance.system;
 
 import insurance.model.*;
+import insurance.system.comparators.*;
 
 import java.util.*;
 
@@ -10,259 +11,222 @@ public class Controller {
     private Derivative selected;
 
     public Controller(List<Insurance> obligs) {
-        allBase = new Derivative(obligs);
-        selected = null;
-    }
-
-    public Controller(){
         view = new View();
-        int n = 10;
-        List<Insurance> obligs = new LinkedList<Insurance>();
+        allBase = new Derivative(obligs);
+        selected = null;
+    }
 
-
-        obligs.add(new EmployersCompensation("Insurer1", "Insured5", 80000000000l,
-                30000, 0.8547362514f, "Liable1", "Employer1" ));
-        obligs.add(new EmployersCompensation("Insurer2", "Insured1", 30000000000l,
-                70000, 0.754684675645f,  "Liable1", "Employer2"));
-        obligs.add(new AccidentInsurance("Insurer1", "Insured3", 700000000000l,
-                20000, 0.89735645f, "Someone1", "Breaking leg"));
-        obligs.add(new MedicalInsurance("Insurer2", "Insured10", 4000000000l,
-                30000, 0.12345f, "Someone2", 1234567));
-        obligs.add(new HomeInsurance("Insurer3", "Insured15", 695000000000l,
-                40000, 0.653424f, "House", "Khreshchstyk street, 8"));
-        obligs.add(new HomeInsurance("Insurer3", "Insured9", 565000000,
-                9000, 0.8957356f, "Factory", "Kharkivska highway, 40"));
-
-
+    public Controller() {
+        view = new View();
+        List<Insurance> obligs = new ArrayList<Insurance>();
         allBase = new Derivative(obligs);
         selected = null;
     }
 
 
-
-   public long countSummaryContribution(){
-       long sum = 0;
-       for(int i = 0; i < allBase.getObligations().size(); i++){
-           sum += allBase.getObligations().get(i).getContribution();
-       }
-       return sum;
-   }
-
-   public long countSummaryCompensation(){
-
-       long sum = 0;
-       for(int i = 0; i < allBase.getObligations().size(); i++){
-           sum += allBase.getObligations().get(i).getCompensation();
-       }
-       return sum;
-   }
-
-
-   public void sortingDescByRisk(){
-       Comparator<Insurance> comparator = new InsuranceRiskDescComparator();
-       selected = new Derivative(allBase);
-       Collections.sort(selected.getObligations(), comparator);
-   }
-
-
-    public Derivative selectContributions(int lowID, int topID){
-        List<Insurance> newDerivative = new LinkedList<Insurance>();
-        for(int i = 0; i < allBase.getObligations().size(); i++){
-            if(allBase.getObligations().get(i).getContribution()<= topID &&
-                    allBase.getObligations().get(i).getContribution()>= lowID){
-                newDerivative.add(allBase.getObligations().get(i));
-            }
+    public long countSummaryContribution() {
+        long sum = 0;
+        for (int i = 0; i < allBase.getObligations().size(); i++) {
+            sum += allBase.getObligations().get(i).getContribution();
         }
-        return new Derivative(newDerivative);
+        return sum;
     }
-    public Derivative selectCompensations(long lowID, long topID){
-        List<Insurance> newDerivative = new LinkedList<Insurance>();
-        for(int i = 0; i < allBase.getObligations().size(); i++){
-            if(allBase.getObligations().get(i).getCompensation()<= topID &&
-                    allBase.getObligations().get(i).getCompensation()>= lowID){
-                newDerivative.add(allBase.getObligations().get(i));
-            }
+
+    public long countSummaryCompensation() {
+        long sum = 0;
+        for (int i = 0; i < allBase.getObligations().size(); i++) {
+            sum += allBase.getObligations().get(i).getCompensation();
         }
-        return new Derivative(newDerivative);
+        return sum;
     }
-    public Derivative selectRisks(float lowID, float topID){
-        List<Insurance> newDerivative = new LinkedList<Insurance>();
-        for(int i = 0; i < allBase.getObligations().size(); i++){
-            if(allBase.getObligations().get(i).getRisk()<= topID &&
-                    allBase.getObligations().get(i).getRisk()>= lowID){
+
+
+    public void sortingDescByRisk() {
+        Comparator<Insurance> comparator = new InsuranceRiskDescComparator();
+        selected = new Derivative(allBase);
+        Collections.sort(selected.getObligations(), comparator);
+    }
+
+
+    public Derivative selectContributions(int lowID, int topID) {
+        List<Insurance> newDerivative = new ArrayList<Insurance>();
+        for (int i = 0; i < allBase.getObligations().size(); i++) {
+            if (allBase.getObligations().get(i).getContribution() <= topID &&
+                    allBase.getObligations().get(i).getContribution() >= lowID) {
                 newDerivative.add(allBase.getObligations().get(i));
             }
         }
         return new Derivative(newDerivative);
     }
 
+    public Derivative selectCompensations(long lowID, long topID) {
+        List<Insurance> newDerivative = new ArrayList<Insurance>();
+        for (int i = 0; i < allBase.getObligations().size(); i++) {
+            if (allBase.getObligations().get(i).getCompensation() <= topID &&
+                    allBase.getObligations().get(i).getCompensation() >= lowID) {
+                newDerivative.add(allBase.getObligations().get(i));
+            }
+        }
+        return new Derivative(newDerivative);
+    }
+
+    public Derivative selectRisks(float lowID, float topID) {
+        List<Insurance> newDerivative = new ArrayList<Insurance>();
+        for (int i = 0; i < allBase.getObligations().size(); i++) {
+            if (allBase.getObligations().get(i).getRisk() <= topID &&
+                    allBase.getObligations().get(i).getRisk() >= lowID) {
+                newDerivative.add(allBase.getObligations().get(i));
+            }
+        }
+        return new Derivative(newDerivative);
+    }
 
 
-    public void mainMenu(){
+    public void mainMenu() {
         view.menu();
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = ScannerHolder.scanner;
         int n = scanner.nextInt();
-
-
-
-        switch (n){
-            case 1:{
+        switch (n) {
+            case 1: {
                 viewResults(allBase);
                 mainMenu();
                 break;
             }
-            case 2:{
-                System.out.println("Суммарная стоимость взносов: " + countSummaryContribution());
+            case 2: {
+                System.out.println("Summary contribution is: " + countSummaryContribution());
                 mainMenu();
                 break;
             }
-            case 3:{
-                System.out.println("Суммарная компенсация: " + countSummaryCompensation());
+            case 3: {
+                System.out.println("Summary compensation is: " + countSummaryCompensation());
                 mainMenu();
                 break;
             }
-            case 4:{
+            case 4: {
                 sortingDescByRisk();
                 viewResults(selected);
                 mainMenu();
                 break;
             }
-            case 5:{
-                System.out.println("ПОИСК ОБЯЗАТЕЛЬСТВ ПО ИНТЕРВАЛУ ВЗНОСОВ");
-                System.out.print("Начало интервала:\t");
-                if(!scanner.hasNextInt()){
-                    System.out.println("Ошибка! Это не число!");
-                    mainMenu();
-                    return;
+            case 5: {
+                System.out.println(CommonlyUsedStrings.SEARCHING_INSURANCE_OF + "CONTRIBUTIONS");
+                System.out.print(CommonlyUsedStrings.INTERVAL_START);
+                if (!scanner.hasNextInt()) {
+                    showErrorInInput();
                 }
                 int first = scanner.nextInt();
-                System.out.print("Конец интервала:\t");
-                if(!scanner.hasNextInt()){
-                    System.out.println("Ошибка! Это не число!");
-                    mainMenu();
-                    return;
+                System.out.print(CommonlyUsedStrings.INTERVAL_END);
+                if (!scanner.hasNextInt()) {
+                    showErrorInInput();
                 }
                 int last = scanner.nextInt();
                 selected = selectContributions(first, last);
-                Comparator comparator = new InsuranceContributionComparator();
-                Collections.sort(selected.getObligations(), comparator);
+                Collections.sort(selected.getObligations(), new InsuranceContributionComparator());
                 viewResults(selected);
                 mainMenu();
                 break;
             }
-            case 6:{
-                System.out.println("ПОИСК ОБЯЗАТЕЛЬСТВ ПО ИНТЕРВАЛУ КОМПЕНСАЦИЙ");
-                System.out.print("Начало интервала:\t");
-                if(!scanner.hasNextLong()){
-                    System.out.println("Ошибка! Это не число!");
-                    mainMenu();
-                    return;
+            case 6: {
+                System.out.println(CommonlyUsedStrings.SEARCHING_INSURANCE_OF + "COMPENSATIONS");
+                System.out.print(CommonlyUsedStrings.INTERVAL_START);
+                if (!scanner.hasNextLong()) {
+                    showErrorInInput();
                 }
                 long first = scanner.nextLong();
-                System.out.print("Конец интервала:\t");
-                if(!scanner.hasNextLong()){
-                    System.out.println("Ошибка! Это не число!");
-                    mainMenu();
-                    return;
+                System.out.print(CommonlyUsedStrings.INTERVAL_END);
+                if (!scanner.hasNextLong()) {
+                    showErrorInInput();
                 }
                 long last = scanner.nextLong();
                 selected = selectCompensations(first, last);
-                Comparator comparator = new InsuranceCompensationComparator();
-                Collections.sort(selected.getObligations(), comparator);
+                Collections.sort(selected.getObligations(), new InsuranceCompensationComparator());
                 viewResults(selected);
                 mainMenu();
                 break;
             }
-            case 7:{
-                System.out.println("ПОИСК ОБЯЗАТЕЛЬСТВ ПО ИНТЕРВАЛУ УРОВНЕЙ РИСКА");
-                System.out.print("Начало интервала:\t");
-                if(!scanner.hasNextFloat()){
-                    System.out.println("Ошибка! Это не число!");
-                    mainMenu();
-                    return;
+            case 7: {
+                System.out.println(CommonlyUsedStrings.SEARCHING_INSURANCE_OF + "RISK LEVEL");
+                System.out.print(CommonlyUsedStrings.INTERVAL_START);
+                if (!scanner.hasNextFloat()) {
+                    showErrorInInput();
                 }
                 float first = scanner.nextFloat();
-                System.out.print("Конец интервала:\t");
-                if(!scanner.hasNextFloat()){
-                    System.out.println("Ошибка! Это не число!");
-                    mainMenu();
-                    return;
+                System.out.print(CommonlyUsedStrings.INTERVAL_END);
+                if (!scanner.hasNextFloat()) {
+                    showErrorInInput();
                 }
                 float last = scanner.nextFloat();
                 selected = selectRisks(first, last);
-                Comparator comparator = new InsuranceRiskComparator();
-                Collections.sort(selected.getObligations(), comparator);
+                Collections.sort(selected.getObligations(), new InsuranceRiskComparator());
                 viewResults(selected);
                 mainMenu();
                 break;
             }
-            case 8:{
-                System.out.println("ДОБАВЛЕНИЕ ОБЯЗАТЕЛЬСТВА\n");
+            case 8: {
+                System.out.println("ADDING INSURANCE\n");
                 scanner.nextLine();
-                System.out.println("Страховщик: ");
+                System.out.println("Insurer: ");
                 String insurer = scanner.nextLine();
-                System.out.println("Страхователь: ");
+                System.out.println("Insured: ");
                 String insured = scanner.nextLine();
-                System.out.println("Взнос: ");
-                if(!scanner.hasNextInt()){
-                    System.out.println("Ошибка! Это не число!");
-                    mainMenu();
-                    return;
+                System.out.println("Contribution: ");
+                if (!scanner.hasNextInt()) {
+                    showErrorInInput();
                 }
                 int contribution = scanner.nextInt();
-                System.out.println("Компенсация: ");
-                if(!scanner.hasNextLong()){
-                    System.out.println("Ошибка! Это не число!");
-                    mainMenu();
-                    return;
+                System.out.println("Compensation: ");
+                if (!scanner.hasNextLong()) {
+                    showErrorInInput();
                 }
                 long compensation = scanner.nextLong();
-                System.out.println("Степень риска: ");
-                if(!scanner.hasNextFloat()){
-                    System.out.println("Ошибка! Это не число!");
-                    mainMenu();
-                    return;
+                System.out.println("Risk level: ");
+                if (!scanner.hasNextFloat()) {
+                    showErrorInInput();
                 }
                 float risk = scanner.nextFloat();
                 scanner.nextLine();
                 Insurance insurance;
-                System.out.println("Тип обязательства: ");
+                System.out.println("Insurance type: ");
                 String type = scanner.nextLine();
-                 insurance = Factory.getSpecificInsurance(
-                        new Insurance(insurer, insured, compensation,contribution, risk),
+                insurance = Factory.getSpecificInsurance(
+                        new Insurance(insurer, insured, compensation, contribution, risk),
                         Factory.getInsuranceType(type));
 
                 allBase = allBase.addObligation(insurance);
                 mainMenu();
                 break;
             }
-            case 9:{
-                System.out.println("УДАЛЕНИЕ ОБЯЗАТЕЛЬСТВА\n");
+            case 9: {
+                System.out.println("DELETING INSURANCE\n");
                 System.out.print("ID:\t");
-                if(!scanner.hasNextInt()){
-                    System.out.println("Ошибка! Это не число!");
-                    mainMenu();
-                    return;
+                if (!scanner.hasNextInt()) {
+                    showErrorInInput();
                 }
                 int idx = scanner.nextInt();
-                if(allBase.delObligation(idx))
+                if (allBase.delObligation(idx))
                     viewResults(allBase);
-                else System.out.println("Обязательства не существует.");
+                else System.out.println("Insurance doesn't exist.");
                 mainMenu();
                 break;
 
             }
             case 10:
-                System.out.println("Досвидания");
+                System.out.println("Goodbye!");
                 break;
             default:
-                System.out.println("Введён неправильный номер");
+                System.out.println("Incorrect number!");
 
         }
         scanner.close();
     }
 
-    public void viewResults(Derivative results){
+    private void showErrorInInput() {
+        System.out.println("Error! It's not a number!");
+        mainMenu();
+        return;
+    }
+
+    public void viewResults(Derivative results) {
         view.outputResults(results.getObligations());
     }
 

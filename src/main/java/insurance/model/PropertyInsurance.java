@@ -18,9 +18,8 @@ public class PropertyInsurance extends Insurance {
         this.propertyType = propertyType;
     }
 
-    public String toString(){
+    public String toString() {
         return super.toString() + String.format("  %-25s  ",
                 "Property type: " + propertyType);
     }
 }
-
